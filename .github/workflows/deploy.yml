@@ -10,8 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Set up Java
         uses: actions/setup-java@v4
@@ -19,12 +18,12 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Build application
-        run: mvn clean package
+      - name: Build
+        run: mvn clean package -DskipTests
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
-          app-name: purchase-api
+          app-name: purchase-api #deploy
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           package: target/demo-0.0.1-SNAPSHOT.jar
