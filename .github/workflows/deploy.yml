@@ -1,4 +1,4 @@
-name: Build and Deploy Spring Boot App
+name: Deploy Spring Boot to Azure
 
 on:
   push:
@@ -10,23 +10,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Set up Java
         uses: actions/setup-java@v4
         with:
-          java-version: '17'   # 🔥 keep 17
+          java-version: '17'
           distribution: 'temurin'
-          cache: maven        # 🚀 speeds up builds
 
-      - name: Build with Maven
+      - name: Build
         run: mvn clean package -DskipTests
 
-      - name: List target files (debug)
-        run: ls -la target
-
-      - name: Deploy to Azure
+      - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
           app-name: purchase-api
