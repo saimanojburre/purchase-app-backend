@@ -27,26 +27,29 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http
-            .cors(cors -> {}) // ✅ Enable CORS
+            .cors(cors -> {})
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/auth/**").permitAll()
+                .requestMatchers("/api/auth/**", "/v3/api-docs/**",
+                        "/api-docs/**",
+                        "/swagger-ui/**",
+                        "/swagger-ui.html").permitAll()
                 .anyRequest().authenticated()
             );
 
-        // ✅ Add JWT filter
+        // Add JWT filter
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
 
-    // ✅ Password encoder (for login/register)
+    // Password encoder (for login/register)
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    // ✅ CORS configuration for Angular
+    // CORS configuration for Angular
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
 
