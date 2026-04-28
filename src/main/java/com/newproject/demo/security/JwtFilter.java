@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 @Component
 public class JwtFilter extends OncePerRequestFilter {
@@ -35,7 +36,7 @@ public class JwtFilter extends OncePerRequestFilter {
 					// Mark user as authenticated
 					SecurityContextHolder.getContext().setAuthentication(
 							new org.springframework.security.authentication.UsernamePasswordAuthenticationToken(
-									username, null, null));
+									username, null, new ArrayList<>()));
 				}
 
 			} catch (Exception e) {
@@ -48,7 +49,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
-       String path = request.getServletPath();
+       String path = request.getRequestURI();
 
        return path.startsWith("/api/auth") ||
                path.startsWith("/swagger-ui") ||
