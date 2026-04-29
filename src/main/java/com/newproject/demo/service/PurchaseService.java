@@ -26,6 +26,27 @@ public class PurchaseService {
 		return repository.findAll();
 	}
 
+    public Purchase update(Long id, Purchase updateData){
+        Purchase existing = repository.findById(id).orElseThrow(()-> new RuntimeException("Record Not Found"));
+        existing.setCustomerName(updateData.getCustomerName());
+        existing.setProductName(updateData.getProductName());
+        existing.setQuantity(updateData.getQuantity());
+        existing.setPrice(updateData.getPrice());
+        existing.setAmount(updateData.getAmount());
+        existing.setDate(updateData.getDate());
+
+        return repository.save(existing);
+    }
+
+    public void delete(Long id){
+        if(!repository.existsById(id)){
+            throw new RuntimeException("Record Not Found");
+
+        }
+        repository.deleteById(id);
+    }
+
+
 	// API 1
 	public List<Purchase> getByDate(LocalDate startDate, LocalDate endDate) {
 		return repository.findByDateRange(startDate, endDate);

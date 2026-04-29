@@ -4,6 +4,7 @@ import com.newproject.demo.entity.Purchase;
 import com.newproject.demo.service.PurchaseService;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -29,6 +30,17 @@ public class PurchaseController {
 	public List<Purchase> getAllPurchases() {
 		return service.getAllPurchases();
 	}
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Purchase> update(@PathVariable Long id, @RequestBody Purchase purchase){
+        return  ResponseEntity.ok(service.update(id, purchase));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> delete(@PathVariable Long id){
+        service.delete(id);
+        return ResponseEntity.ok("Deleted");
+    }
 
 	// 🔹 API 1 → Date filter
 	@GetMapping("/by-date")
