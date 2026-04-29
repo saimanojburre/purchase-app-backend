@@ -32,7 +32,7 @@ public class PurchaseService {
         existing.setProductName(updateData.getProductName());
         existing.setQuantity(updateData.getQuantity());
         existing.setPrice(updateData.getPrice());
-        existing.setAmount(updateData.getAmount());
+        existing.setAmount(updateData.getQuantity() * updateData.getPrice());
         existing.setDate(updateData.getDate());
 
         return repository.save(existing);
