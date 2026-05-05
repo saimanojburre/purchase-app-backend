@@ -42,7 +42,7 @@ public class PurchaseController {
         return ResponseEntity.ok("Deleted");
     }
 
-	// 🔹 API 1 → Date filter
+	// API 1 → Date filter
 	@GetMapping("/by-date")
 	public List<Purchase> getByDate(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
 
@@ -50,7 +50,7 @@ public class PurchaseController {
 		return service.getByDate(startDate, endDate);
 	}
 
-	// 🔹 API 2 → Name filter
+	// API 2 → Name filter
 	@GetMapping("/by-name")
 	public List<Purchase> getByName(@RequestParam String customerName) {
 
