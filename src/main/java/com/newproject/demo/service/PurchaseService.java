@@ -2,6 +2,7 @@ package com.newproject.demo.service;
 
 import com.newproject.demo.entity.Purchase;
 import com.newproject.demo.repository.PurchaseRepository;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -23,7 +24,7 @@ public class PurchaseService {
 	}
 
 	public List<Purchase> getAllPurchases() {
-		return repository.findAll();
+		return repository.findAll(Sort.by(Sort.Direction.DESC, "date"));
 	}
 
     public Purchase update(Long id, Purchase updateData){
