@@ -24,7 +24,7 @@ public class PurchaseService {
 	}
 
 	public List<Purchase> getAllPurchases() {
-		return repository.findAll(Sort.by(Sort.Direction.DESC, "date"));
+		return repository.findAll(Sort.by(Sort.Direction.DESC, "id"));
 	}
 
     public Purchase update(Long id, Purchase updateData){
