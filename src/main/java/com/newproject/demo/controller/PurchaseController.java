@@ -39,7 +39,7 @@ public class PurchaseController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id){
         service.delete(id);
-        return ResponseEntity.ok("Deleted");
+        return ResponseEntity.ok().build();
     }
 
 	// API 1 → Date filter
